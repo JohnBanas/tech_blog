@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const sequelize = require('../../config/connection');
-const { Post, User, Comments, Vote } = require('../../models');
-// const withAuth = require('../../utils/auth');
+const { Post, User, Comments } = require('../../models');
+const withAuth = require('../../utils/auth');
 
 // get all user's posts
 router.get('/', (req, res) => {
@@ -9,8 +9,8 @@ router.get('/', (req, res) => {
   Post.findAll({
     attributes: [
       'id',
-      'post_content',
       'title',
+      'post_content',
       'created_at'
     ],
     include: [
@@ -44,8 +44,8 @@ router.get('/:id', (req, res) => {
     },
     attributes: [
       'id',
-      'post_content',
       'title',
+      'post_content',
       'created_at'
     ],
     include: [
@@ -77,13 +77,12 @@ router.get('/:id', (req, res) => {
 });
 
 //create post
-router.post('/', /*withAuth,*/ (req, res) => {
+router.post('/', withAuth, (req, res) => {
   // expects {title: 'Taskmaster goes public!', post_url: 'https://taskmaster.com/press', user_id: 1}
   Post.create({
     title: req.body.title,
     post_content: req.body.post_content,
-    user_id: req.body.user_id
-    /*user_id: req.session.user_id*/
+    user_id: req.session.user_id
   })
     .then(dbPostData => res.json(dbPostData))
     .catch(err => {
@@ -93,7 +92,7 @@ router.post('/', /*withAuth,*/ (req, res) => {
 });
 
 //update post
-router.put('/:id', /*withAuth,*/ (req, res) => {
+router.put('/:id', withAuth, (req, res) => {
   Post.update(
     {
       title: req.body.title,
@@ -119,7 +118,7 @@ router.put('/:id', /*withAuth,*/ (req, res) => {
 });
 
 //delete post
-router.delete('/:id', /*withAuth,*/ (req, res) => {
+router.delete('/:id', withAuth, (req, res) => {
   Post.destroy({
     where: {
       id: req.params.id
