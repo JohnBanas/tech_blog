@@ -12,13 +12,20 @@
   <div class="wrapper">
     <header>
       <h1>
-        <a href="/">Tech Blog</a>
+        Tech Blog
       </h1>
       <nav>
-        <a href="#">Home</a>
-        <a href="#">Dashboard</a>
-        <a href="#">Logout</a>
-        <a href="/login/">Login</a>
+        
+        <a href="/">Home</a>
+        <a href="/dashboard">Dashboard</a>
+        {{!-- If logged in don't show login link --}}
+        {{#unless loggedIn}}
+        <a href="/login">Login</a>
+        {{/unless}}
+        {{!-- If you are logged in create logout button --}}
+        {{#if loggedIn}}
+        <button id="logout" class="btn-no-style">Logout</button>
+        {{/if}}
       </nav>
     </header>
     <main>
@@ -28,7 +35,9 @@
       Have a wonderful day!
     </footer>
   </div>
-
+{{#if loggedIn}}
+<script src="/javascript/logout.js"></script>
+{{/if}}
 </body>
 
 </html>

@@ -3,7 +3,9 @@
     <h3>{{title}}</a>
     <p>({{ post_content }})</p>
   </div>
+  {{#if loggedIn}}
   <div class="meta">
     <a href="/post/{{id}}">{{comments.length}} {{ format_plural "comment" comments.length}}</a>
   </div>
+  {{/if}}
 </article>

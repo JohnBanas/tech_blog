@@ -1,4 +1,5 @@
 <div class="comments">
+  {{#if loggedIn}}
   {{#each this}}
   <section class="comments">
     <div class="meta">
@@ -8,5 +9,6 @@
       {{comments_text}}
     </div>
   </section>
-  {{/each}}
+  {{/each}} 
+  {{/if}}
 </div>
