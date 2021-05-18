@@ -13,6 +13,7 @@ router.get('/', (req, res) => {
     });
 });
 
+//get one user
 router.get('/:id', (req, res) => {
   User.findOne({
     attributes: { exclude: ['password'] },
@@ -47,12 +48,14 @@ router.get('/:id', (req, res) => {
     });
 });
 
+//create user
 router.post('/', (req, res) => {
   User.create({
     username: req.body.username,
     password: req.body.password
   })
     .then(dbUserData => {
+      //create cookie session
       req.session.save(() => {
         req.session.user_id = dbUserData.id;
         req.session.username = dbUserData.username;
@@ -67,6 +70,7 @@ router.post('/', (req, res) => {
     });
 });
 
+//login user
 router.post('/login', (req, res) => {
   console.log(req.body);
   User.findOne({
@@ -80,6 +84,7 @@ router.post('/login', (req, res) => {
       return;
     }
 
+    //validate the password
     const validPassword = dbUserData.checkPassword(req.body.password);
 
     if (!validPassword) {
@@ -87,6 +92,7 @@ router.post('/login', (req, res) => {
       return;
     }
 
+    //save session
     req.session.save(() => {
       req.session.user_id = dbUserData.id;
       req.session.username = dbUserData.username;
@@ -100,6 +106,7 @@ router.post('/login', (req, res) => {
   })
 });
 
+//logout user and destroy cookie session
 router.post('/logout', (req, res) => {
   if (req.session.loggedIn) {
     req.session.destroy(() => {
@@ -111,6 +118,7 @@ router.post('/logout', (req, res) => {
   }
 });
 
+//update user info
 router.put('/:id', (req, res) => {
   // pass in req.body instead to only update what's passed through
   User.update(req.body, {
@@ -132,6 +140,7 @@ router.put('/:id', (req, res) => {
     });
 });
 
+//delete user not currently used but for later
 router.delete('/:id', (req, res) => {
   User.destroy({
     where: {
