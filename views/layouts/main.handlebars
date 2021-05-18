@@ -5,36 +5,36 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tech Blog</title>
-  <link rel="stylesheet" href="/stylesheets/style.css">
+  <link rel="stylesheet" href="/stylesheets/tailwind.css">
 </head>
 
 <body>
-  <div class="wrapper">
-    <header>
-      <h1>
+    <header class="flex items-center justify-between flex-wrap bg-gray-800 p-6 text-white">
+      <h1 class="font-semibold text-xl tracking-tight">
         Tech Blog
       </h1>
       <nav>
         
-        <a href="/">Home</a>
-        <a href="/dashboard">Dashboard</a>
+        <a class="inline-block rounded py-1 px-3 bg-white-200 text-white-800 hover:text-red-600 hover:bg-white-800 hover:border-white-500-rounded" href="/">Home</a>
+        <a class="inline-block rounded py-1 px-3 bg-white-200 text-white-800 hover:text-red-600 hover:bg-white-800 hover:border-white-500-rounded" href="/dashboard">Dashboard</a>
         {{!-- If logged in don't show login link --}}
         {{#unless loggedIn}}
-        <a href="/login">Login</a>
+        <a class="inline-block rounded py-1 px-3 bg-white-200 text-white-800 hover:text-red-600 hover:bg-white-800 hover:border-white-500-rounded" href="/login">Login</a>
         {{/unless}}
         {{!-- If you are logged in create logout button --}}
         {{#if loggedIn}}
-        <button id="logout" class="btn-no-style">Logout</button>
+        <button id="logout" class="btn-no-style inline-block rounded py-1 px-3 bg-white-200 text-white-800 hover:text-red-600 hover:bg-white-800 hover:border-white-500-rounded">Logout</button>
         {{/if}}
       </nav>
     </header>
     <main>
       {{{ body }}}
     </main>
-    <footer>
-      Have a wonderful day!
+    <div class="flex justify-center bg-gray-800 p-6 text-white">
+    <footer class="font-semibold text-xl">
+      We are... TECH-nically speaking...
     </footer>
-  </div>
+    </div>
 {{#if loggedIn}}
 <script src="/javascript/logout.js"></script>
 {{/if}}
