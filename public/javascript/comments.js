@@ -26,4 +26,5 @@ async function commentsFormHandler(event) {
   }
 }
 
+
 document.querySelector('.comments-form').addEventListener('submit', commentsFormHandler);

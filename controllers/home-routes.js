@@ -105,13 +105,5 @@ router.get('/sign-up', (req, res) => {
   res.render('sign-up');
 });
 
-router.get('/create-posts', (req, res) => {
-  if (req.session.loggedIn) {
-    res.render('create-posts');
-    return;
-  }
-  res.render('create-posts');
-})
-
 
 module.exports = router;
